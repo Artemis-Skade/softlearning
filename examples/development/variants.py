@@ -35,8 +35,8 @@ ALGORITHM_PARAMS_ADDITIONAL = {
         'class_name': 'SAC',
         'config': {
             'policy_lr': 7.3e-4,
-            'Q_lr': 1e-3,
-            'alpha_lr': 1e-3,
+            'Q_lr': 7.3e-4,
+            'alpha_lr': 7.3e-4,
             'target_update_interval': 1,
             'tau': 0.02,
             'target_entropy': 'auto',
