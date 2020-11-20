@@ -84,8 +84,7 @@ class ExperimentRunner(tune.Trainable):
         sampler = self.sampler = samplers.get(variant['sampler_params'])
 
         set_random_seed(variant['run_params']['seed'])
-
-        save_path = os.path.join("./results", f"{policy}", f"{evaluation_environment}_{variant['run_params']['seed']}")
+        save_path = os.path.join("./results", f"logs", f"sac_{variant['run_params']['seed']}",f"sac")
         os.makedirs(save_path, exist_ok=True)
 
         eval_callback = EvalCallback(
