@@ -5,7 +5,7 @@ import copy
 
 import gym
 from gym import spaces, wrappers
-from gym.envs.mujoco.mujoco_env import MujocoEnv
+import pybullet_envs
 
 from .softlearning_env import SoftlearningEnv
 from softlearning.environments.gym import register_environments
