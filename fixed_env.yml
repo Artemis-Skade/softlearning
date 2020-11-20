@@ -1,33 +1,45 @@
-name: softlearning_fixed
+name: soft
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
   - blas=1.0=mkl
+  - blessings=1.7=py38_1002
   - brotlipy=0.7.0=py38h27cfd23_1003
   - ca-certificates=2020.10.14=0
   - chardet=3.0.4=py38h06a4308_1003
   - conda=4.9.2=py38h06a4308_0
   - conda-package-handling=1.7.2=py38h03888b9_0
   - cryptography=3.2.1=py38h3c74f83_1
+  - cudatoolkit=10.1.243=h6bb024c_0
   - freeglut=3.0.0=hf484d3e_5
+  - gpustat=0.6.0=py_0
   - intel-openmp=2020.2=254
   - ld_impl_linux-64=2.33.1=h53a641e_7
+  - libblas=3.9.0=1_h6e990d7_netlib
+  - libcblas=3.9.0=3_h893e4fe_netlib
   - libedit=3.1.20191231=h14c3975_1
   - libffi=3.3=he6710b0_2
   - libgcc-ng=9.1.0=hdf63c60_0
+  - libgfortran-ng=7.5.0=hae1eefd_17
+  - libgfortran4=7.5.0=hae1eefd_17
+  - liblapack=3.9.0=3_h893e4fe_netlib
   - libstdcxx-ng=9.1.0=hdf63c60_0
   - mkl=2020.2=256
   - mkl-service=2.3.0=py38he904b0f_0
   - mkl_fft=1.2.0=py38h23d657b_0
   - mkl_random=1.1.1=py38h0573a6f_0
   - ncurses=6.2=he6710b0_1
+  - nvidia-ml=7.352.0=py_0
   - openssl=1.1.1h=h7b6447c_0
   - pycosat=0.6.3=py38h7b6447c_1
+  - pyopengl=3.1.5=py_0
   - pyopengl-accelerate=3.1.3b1=py38hdd07704_0
   - pyopenssl=19.1.0=pyhd3eb1b0_1
   - pysocks=1.7.1=py38h06a4308_0
   - python=3.8.5=h7579374_1
+  - python_abi=3.8=1_cp38
   - readline=8.0=h7b6447c_0
   - ruamel_yaml=0.15.87=py38h7b6447c_1
   - sqlite=3.33.0=h62c20be_0
@@ -35,7 +47,6 @@ dependencies:
   - xz=5.2.5=h7b6447c_0
   - yaml=0.2.5=h7b6447c_0
   - zlib=1.2.11=h7b6447c_3
-  - pip
   - pip:
     - absl-py==0.9.0
     - aiohttp==3.7.3
@@ -48,7 +59,6 @@ dependencies:
     - attrs==19.3.0
     - backcall==0.2.0
     - beautifulsoup4==4.9.3
-    - blessings==1.7
     - boto3==1.11.5
     - botocore==1.14.5
     - cachetools==4.0.0
@@ -60,6 +70,7 @@ dependencies:
     - colorful==0.5.4
     - cycler==0.10.0
     - cython==0.29.14
+    - dataclasses==0.6
     - decorator==4.4.1
     - dm-tree==0.1.5
     - docutils==0.15.2
@@ -80,7 +91,6 @@ dependencies:
     - google-auth-oauthlib==0.4.1
     - google-pasta==0.1.8
     - googleapis-common-protos==1.52.0
-    - gpustat==0.6.0
     - grpcio==1.28.1
     - gtimer==1.0.0b5
     - gym==0.17.2
@@ -110,7 +120,7 @@ dependencies:
     - multidict==5.0.2
     - networkx==2.4
     - numpy==1.17.5
-    - nvidia-ml-py3==7.352.0
+    - nvidia-ml-py==375.53.1
     - oauthlib==3.1.0
     - opencensus==0.7.11
     - opencensus-context==0.1.2
@@ -124,7 +134,7 @@ dependencies:
     - pexpect==4.8.0
     - pickleshare==0.7.5
     - pillow==8.0.0
-    - pip==19.3.1
+    - pip==20.2.4
     - pluggy==0.13.1
     - prometheus-client==0.9.0
     - prompt-toolkit==3.0.8
@@ -139,7 +149,6 @@ dependencies:
     - pycparser==2.19
     - pyglet==1.4.0
     - pygments==2.7.2
-    - pyopengl==3.1.5
     - pyparsing==2.4.6
     - pyrsistent==0.15.7
     - pytest==5.3.3
@@ -163,6 +172,7 @@ dependencies:
     - smmap==3.0.4
     - smmap2==2.0.5
     - soupsieve==2.0.1
+    - git+https://github.com/DLR-RM/stable-baselines3
     - tabulate==0.8.6
     - tensorboard==2.3.0
     - tensorboard-plugin-wit==1.7.0
@@ -174,6 +184,7 @@ dependencies:
     - termcolor==1.1.0
     - threadpoolctl==2.1.0
     - tifffile==2020.11.18
+    #- torch==1.7.0+cpu
     - tqdm==4.41.1
     - traitlets==5.0.5
     - typeguard==2.10.0
@@ -186,3 +197,4 @@ dependencies:
     - wrapt==1.11.2
     - yarl==1.6.3
     - zipp==1.0.0
+
