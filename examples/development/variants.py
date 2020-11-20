@@ -16,16 +16,11 @@ NUM_COUPLING_LAYERS = 2
 
 ALGORITHM_PARAMS_BASE = {
     'config': {
-        'train_every_n_steps': 1,
-        'n_train_repeat': 1,
+        'train_every_n_steps': 64,
+        'n_train_repeat': 64,
         'eval_render_kwargs': {},
         'eval_n_episodes': 1,
-        'num_warmup_samples': tune.sample_from(lambda spec: (
-            10 * (spec.get('config', spec)
-                  ['sampler_params']
-                  ['config']
-                  ['max_path_length'])
-        )),
+        'num_warmup_samples': 10000,
     }
 }
 
@@ -379,7 +374,7 @@ def get_variant_spec_base(universe, domain, task, policy, algorithm):
         'Q_params': {
             'class_name': 'double_feedforward_Q_function',
             'config': {
-                'hidden_layer_sizes': (M, M),
+                'hidden_layer_sizes': (400, 300),
                 'observation_keys': None,
                 'preprocessors': None,
             },
@@ -388,7 +383,7 @@ def get_variant_spec_base(universe, domain, task, policy, algorithm):
         'replay_pool_params': {
             'class_name': 'SimpleReplayPool',
             'config': {
-                'max_size': int(1e6),
+                'max_size': int(300000),
             },
         },
         'sampler_params': {
