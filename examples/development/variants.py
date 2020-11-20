@@ -34,14 +34,14 @@ ALGORITHM_PARAMS_ADDITIONAL = {
     'SAC': {
         'class_name': 'SAC',
         'config': {
-            'policy_lr': 3e-4,
-            'Q_lr': 3e-4,
-            'alpha_lr': 3e-4,
+            'policy_lr': 7.3e-4,
+            'Q_lr': 1e-3,
+            'alpha_lr': 1e-3,
             'target_update_interval': 1,
-            'tau': 5e-3,
+            'tau': 0.02,
             'target_entropy': 'auto',
 
-            'discount': 0.99,
+            'discount': 0.98,
             'reward_scale': 1.0,
         },
     },
@@ -97,6 +97,10 @@ TOTAL_STEPS_PER_UNIVERSE_DOMAIN_TASK = {
             'v3': int(1e6),
         },
         'HalfCheetah': {
+            DEFAULT_KEY: int(3e6),
+            'v3': int(3e6),
+        },
+        'HalfCheetahBulletEnv': {
             DEFAULT_KEY: int(3e6),
             'v3': int(3e6),
         },
