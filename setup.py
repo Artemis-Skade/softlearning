@@ -45,7 +45,7 @@ setup(
         'numpy>=1.17.5',
         'pandas',
         'ray[tune]>=1.0.0',
-        'scikit-image>=0.17.2',
+        'scikit-image==0.17.2',
         'scikit-video>=1.1.11',
         'scipy>=1.4.1',
         'tensorflow>=2.2.0',
