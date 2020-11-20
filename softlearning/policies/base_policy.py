@@ -41,6 +41,7 @@ class BasePolicy:
         self._preprocessors = preprocessors
 
         self._name = name
+        self.num_timesteps = 0
 
     def _create_inputs(self, input_shapes):
         self._inputs = create_inputs(input_shapes)
@@ -157,6 +158,13 @@ class BasePolicy:
         prob = tree.map_structure(lambda x: x[0], probs)
         return prob
 
+    def predict(self, obs, state, deterministic=True):
+        with self.evaluation_mode():
+            return self.actions(obs)
+
+    def get_env(self):
+        return None
+
     @contextmanager
     def evaluation_mode(self):
         """Sets the policy to function in evaluation mode.
@@ -192,7 +200,7 @@ class BasePolicy:
 
     def _filter_observations(self, observations):
         if (isinstance(observations, dict)
-            and self._observation_keys is not None):
+                and self._observation_keys is not None):
             observations = type(observations)((
                 (key, observations[key])
                 for key in self.observation_keys
@@ -296,8 +304,8 @@ class LatentSpacePolicy(ContinuousPolicy):
         self._smoothing_coefficient = smoothing_coefficient
         self._smoothing_alpha = smoothing_coefficient or 0
         self._smoothing_beta = (
-            np.sqrt(1.0 - np.power(self._smoothing_alpha, 2.0))
-            / (1.0 - self._smoothing_alpha))
+                np.sqrt(1.0 - np.power(self._smoothing_alpha, 2.0))
+                / (1.0 - self._smoothing_alpha))
         self._reset_smoothing_x()
         self._smooth_latents = False
 
