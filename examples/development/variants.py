@@ -101,8 +101,8 @@ TOTAL_STEPS_PER_UNIVERSE_DOMAIN_TASK = {
             'v3': int(3e6),
         },
         'HalfCheetahBulletEnv': {
-            DEFAULT_KEY: int(3e6),
-            'v3': int(3e6),
+            DEFAULT_KEY: int(1e6),
+            'v0': int(1e6),
         },
         'Walker2d': {
             DEFAULT_KEY: int(3e6),
@@ -124,98 +124,6 @@ TOTAL_STEPS_PER_UNIVERSE_DOMAIN_TASK = {
         },
         'Point2DEnv': {
             DEFAULT_KEY: int(5e4),
-        },
-    },
-    'dm_control': {
-        # BENCHMARKING
-        DEFAULT_KEY: int(3e6),
-        'acrobot': {
-            DEFAULT_KEY: int(3e6),
-            # 'swingup': int(None),
-            # 'swingup_sparse': int(None),
-        },
-        'ball_in_cup': {
-            DEFAULT_KEY: int(3e6),
-            # 'catch': int(None),
-        },
-        'cartpole': {
-            DEFAULT_KEY: int(3e6),
-            # 'balance': int(None),
-            # 'balance_sparse': int(None),
-            # 'swingup': int(None),
-            # 'swingup_sparse': int(None),
-            # 'three_poles': int(None),
-            # 'two_poles': int(None),
-        },
-        'cheetah': {
-            DEFAULT_KEY: int(3e6),
-            'run': int(1e7),
-        },
-        'finger': {
-            DEFAULT_KEY: int(3e6),
-            # 'spin': int(None),
-            # 'turn_easy': int(None),
-            # 'turn_hard': int(None),
-        },
-        'fish': {
-            DEFAULT_KEY: int(3e6),
-            # 'upright': int(None),
-            # 'swim': int(None),
-        },
-        'hopper': {
-            DEFAULT_KEY: int(3e6),
-            # 'stand': int(None),
-            'hop': int(1e7),
-        },
-        'humanoid': {
-            DEFAULT_KEY: int(1e7),
-            'stand': int(1e7),
-            'walk': int(1e7),
-            'run': int(1e7),
-            # 'run_pure_state': int(1e7),
-        },
-        'manipulator': {
-            DEFAULT_KEY: int(3e6),
-            'bring_ball': int(1e7),
-            # 'bring_peg': int(None),
-            # 'insert_ball': int(None),
-            # 'insert_peg': int(None),
-        },
-        'pendulum': {
-            DEFAULT_KEY: int(3e6),
-            # 'swingup': int(None),
-        },
-        'point_mass': {
-            DEFAULT_KEY: int(3e6),
-            # 'easy': int(None),
-            # 'hard': int(None),
-        },
-        'reacher': {
-            DEFAULT_KEY: int(3e6),
-            # 'easy': int(None),
-            # 'hard': int(None),
-        },
-        'swimmer': {
-            DEFAULT_KEY: int(3e6),
-            # 'swimmer6': int(None),
-            # 'swimmer15': int(None),
-        },
-        'walker': {
-            DEFAULT_KEY: int(3e6),
-            # 'stand': int(None),
-            'walk': int(1e7),
-            'run': int(1e7),
-        },
-        # EXTRA
-        'humanoid_CMU': {
-            DEFAULT_KEY: int(3e6),
-            'run': int(1e7),
-            # 'stand': int(None),
-        },
-        'quadruped': {
-            DEFAULT_KEY: int(3e6),
-            'run': int(1e7),
-            'walk': int(1e7),
         },
     },
 }
@@ -492,7 +400,7 @@ def get_variant_spec_base(universe, domain, task, policy, algorithm):
         'run_params': {
             'host_name': get_host_name(),
             'seed': tune.sample_from(
-                lambda spec: np.random.randint(0, 10000)),
+                lambda spec: np.random.randint(2 ** 32 - 1, dtype="int64").item()),
             'checkpoint_at_end': True,
             'checkpoint_frequency': tune.sample_from(get_checkpoint_frequency),
             'checkpoint_replay_pool': False,
