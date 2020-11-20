@@ -14,8 +14,12 @@ class SimpleSampler(BaseSampler):
         self._max_path_return = -np.inf
         self._n_episodes = 0
         self._total_samples = 0
+        self._eval_callback = None
 
         self._is_first_step = True
+
+    def set_callback(self, callback):
+        self._eval_callback = callback
 
     def reset(self):
         if self.policy is not None:
@@ -54,8 +58,9 @@ class SimpleSampler(BaseSampler):
 
         action = self.policy.action(self._policy_input).numpy()
 
-        next_observation, reward, terminal, info = self.environment.step(
-            action)
+        next_observation, reward, terminal, info = self.environment.step(action)
+        if self._eval_callback is not None:
+            self._eval_callback.on_step()
         self._path_length += 1
         self._path_return += reward
         self._total_samples += 1
