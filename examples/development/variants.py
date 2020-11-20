@@ -77,7 +77,7 @@ ALGORITHM_PARAMS_ADDITIONAL = {
 GAUSSIAN_POLICY_PARAMS_BASE = {
     'class_name': 'FeedforwardGaussianPolicy',
     'config': {
-        'hidden_layer_sizes': (M, M),
+        'hidden_layer_sizes': (400, 300),
         'squash': True,
         'observation_keys': None,
         'preprocessors': None,
