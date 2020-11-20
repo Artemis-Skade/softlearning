@@ -40,7 +40,6 @@ setup(
     install_requires=(
         'Click>=7.0',
         'GitPython==3.1.2',
-        'dm-control>=0.0.322773188',
         'gtimer>=1.0.0b5',
         'gym>=0.17.2',
         'numpy>=1.17.5',
