@@ -21,6 +21,10 @@ from softlearning.utils.misc import set_seed
 from softlearning.utils.tensorflow import set_gpu_memory_growth
 from examples.instrument import run_example_local
 
+from stable_baselines3.common.callbacks import EvalCallback
+from stable_baselines3.common.utils import set_random_seed
+
+
 
 class ExperimentRunner(tune.Trainable):
     def setup(self, variant):
@@ -79,9 +83,26 @@ class ExperimentRunner(tune.Trainable):
         })
         sampler = self.sampler = samplers.get(variant['sampler_params'])
 
+        set_random_seed(variant['run_params']['seed'])
+
+        save_path = os.path.join("./results", f"{policy}", f"{evaluation_environment}_{variant['run_params']['seed']}")
+        os.makedirs(save_path, exist_ok=True)
+
+        eval_callback = EvalCallback(
+            evaluation_environment,
+            callback_on_new_best=None,
+            best_model_save_path=None,
+            n_eval_episodes=10,
+            log_path=save_path,
+            eval_freq=10000,#TODO change hardcoded value
+            deterministic=True,
+            verbose=1,
+        )
+        eval_callback.init_callback(policy)
+        sampler.set_callback(eval_callback)
         variant['algorithm_params']['config'].update({
             'training_environment': training_environment,
-            'evaluation_environment': evaluation_environment,
+            'evaluation_environment': None,
             'policy': policy,
             'Qs': Qs,
             'pool': replay_pool,
