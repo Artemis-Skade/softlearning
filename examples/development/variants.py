@@ -354,7 +354,7 @@ def get_variant_spec_base(universe, domain, task, policy, algorithm):
         'policy_params': {
             'class_name': 'FeedforwardGaussianPolicy',
             'config': {
-                'hidden_layer_sizes': (M, M),
+                'hidden_layer_sizes': (400, 300),
                 'squash': True,
                 'observation_keys': None,
                 'preprocessors': None,
@@ -432,7 +432,7 @@ def get_variant_spec_image(universe,
             },
         }
 
-        variant_spec['policy_params']['config']['hidden_layer_sizes'] = (M, M)
+        variant_spec['policy_params']['config']['hidden_layer_sizes'] = (400, 300)
         variant_spec['policy_params']['config']['preprocessors'] = {
             'pixels': deepcopy(preprocessor_params)
         }
