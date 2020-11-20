@@ -17,6 +17,8 @@ try:
     import yaml
 except ImportError:
     yaml = None
+
+
 # pylint: enable=g-import-not-at-top
 
 
@@ -158,9 +160,9 @@ class BasePolicy:
         prob = tree.map_structure(lambda x: x[0], probs)
         return prob
 
-    def predict(self, obs, state, deterministic=True):
+    def predict(self, obs, state=None, deterministic=True):
         with self.evaluation_mode():
-            return self.actions(obs)
+            return self.actions(obs), state
 
     def get_env(self):
         return None
