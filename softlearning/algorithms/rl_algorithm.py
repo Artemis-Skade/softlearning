@@ -224,7 +224,7 @@ class RLAlgorithm(Checkpointable):
                 iteration=self._total_timestep,
                 batch=self._evaluation_batch(),
                 training_paths=training_paths,
-                evaluation_paths=evaluation_paths)
+                evaluation_paths=None)
 
             time_diagnostics = {
                 key: times[-1]
@@ -234,8 +234,8 @@ class RLAlgorithm(Checkpointable):
             # TODO(hartikainen/tf2): Fix the naming of training/update
             # diagnostics/metric
             diagnostics.update((
-                ('evaluation', evaluation_metrics),
-                ('training', training_metrics),
+                ('evaluation', None),
+                ('training', None),
                 ('update', update_diagnostics),
                 ('times', time_diagnostics),
                 ('sampler', sampler_diagnostics),
@@ -244,12 +244,6 @@ class RLAlgorithm(Checkpointable):
                 ('total_timestep', self._total_timestep),
                 ('num_train_steps', self._num_train_steps),
             ))
-
-            if self._eval_render_kwargs and hasattr(
-                    evaluation_environment, 'render_rollouts'):
-                # TODO(hartikainen): Make this consistent such that there's no
-                # need for the hasattr check.
-                training_environment.render_rollouts(evaluation_paths)
 
             yield diagnostics
 
