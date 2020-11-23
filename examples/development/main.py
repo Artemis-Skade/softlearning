@@ -84,8 +84,7 @@ class ExperimentRunner(tune.Trainable):
         sampler = self.sampler = samplers.get(variant['sampler_params'])
 
         set_random_seed(variant['run_params']['seed'])
-        save_path = os.path.join(os.path.dirname(__file__), "results", f"logs", f"sac_{variant['run_params']['seed']}",
-                                 f"sac")
+        save_path = os.path.join(os.path.dirname(__file__), "results", f"logs",f"sac", f"HalfCheetahBulletEnv-v0_{variant['run_params']['seed']}")
         print("this is the save path: " + save_path)
         os.makedirs(save_path, exist_ok=True)
 
