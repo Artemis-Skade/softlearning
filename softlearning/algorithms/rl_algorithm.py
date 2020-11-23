@@ -194,6 +194,7 @@ class RLAlgorithm(Checkpointable):
             training_paths = self.sampler.get_last_n_paths(
                 math.ceil(self._epoch_length / self.sampler._max_path_length))
             gt.stamp('training_paths')
+            """
             evaluation_paths = self._evaluation_paths(
                 policy, evaluation_environment)
             gt.stamp('evaluation_paths')
@@ -213,7 +214,7 @@ class RLAlgorithm(Checkpointable):
                 gt.stamp('evaluation_metrics')
             else:
                 evaluation_metrics = {}
-
+            """
             self._epoch_after_hook(training_paths)
             gt.stamp('epoch_after_hook')
 
