@@ -23,7 +23,7 @@ from examples.instrument import run_example_local
 
 from stable_baselines3.common.callbacks import EvalCallback
 from stable_baselines3.common.utils import set_random_seed
-
+from gym.wrappers import TimeLimit
 
 
 class ExperimentRunner(tune.Trainable):
@@ -84,17 +84,21 @@ class ExperimentRunner(tune.Trainable):
         sampler = self.sampler = samplers.get(variant['sampler_params'])
 
         set_random_seed(variant['run_params']['seed'])
-        save_path = os.path.join(os.path.dirname(__file__),"results", f"logs", f"sac_{variant['run_params']['seed']}",f"sac")
+        save_path = os.path.join(os.path.dirname(__file__), "results", f"logs", f"sac_{variant['run_params']['seed']}",
+                                 f"sac")
         print("this is the save path: " + save_path)
         os.makedirs(save_path, exist_ok=True)
 
+        # create wrapped environment
+        eval_env_wrapped = TimeLimit(evaluation_environment, 1000)
+
         eval_callback = EvalCallback(
-            evaluation_environment,
+            eval_env_wrapped,
             callback_on_new_best=None,
             best_model_save_path=None,
             n_eval_episodes=10,
             log_path=save_path,
-            eval_freq=10000,#TODO change hardcoded value
+            eval_freq=10000,  # TODO change hardcoded value
             deterministic=True,
             verbose=1,
         )
@@ -102,7 +106,7 @@ class ExperimentRunner(tune.Trainable):
         sampler.set_callback(eval_callback)
         variant['algorithm_params']['config'].update({
             'training_environment': training_environment,
-            'evaluation_environment': None,
+            'evaluation_environment': evaluation_environment,
             'policy': policy,
             'Qs': Qs,
             'pool': replay_pool,
