@@ -15,7 +15,7 @@ class SimpleSampler(BaseSampler):
         self._n_episodes = 0
         self._total_samples = 0
         self._eval_callback = None
-
+        self._num_timesteps = 0
         self._is_first_step = True
 
     def set_callback(self, callback):
@@ -59,8 +59,9 @@ class SimpleSampler(BaseSampler):
         action = self.policy.action(self._policy_input).numpy()
 
         next_observation, reward, terminal, info = self.environment.step(action)
-        self.policy.num_timesteps += 1
+        self._num_timesteps += 1
         if self._eval_callback is not None:
+            self._eval_callback.model.num_timesteps = self._num_timesteps
             self._eval_callback.on_step()
         self._path_length += 1
         self._path_return += reward
