@@ -204,7 +204,7 @@ class RLAlgorithm(Checkpointable):
                 self._total_timestep,
                 evaluation_type='train')
             gt.stamp('training_metrics')
-            if evaluation_paths:
+            if False: # evaluation_paths:
                 evaluation_metrics = self._evaluate_rollouts(
                     evaluation_paths,
                     evaluation_environment,
