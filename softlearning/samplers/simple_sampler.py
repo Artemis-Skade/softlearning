@@ -59,6 +59,7 @@ class SimpleSampler(BaseSampler):
         action = self.policy.action(self._policy_input).numpy()
 
         next_observation, reward, terminal, info = self.environment.step(action)
+        self.policy.num_timesteps += 1
         if self._eval_callback is not None:
             self._eval_callback.on_step()
         self._path_length += 1
